@@ -13,6 +13,8 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import useContractFactoryAggregator from "./hooks/useContractFactoryAggregator";
+import walletXIcon from './assets/walletx-icon.png'
+
 
 const App = () => {
 
@@ -51,9 +53,11 @@ const App = () => {
           style={{
             padding: "1rem",
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
+            alignItems: "center"
           }}
         >
+          <img src={walletXIcon} alt="walletx-icon" width="32px" height="32px" style={{borderRadius: "8px"}}/>
           <ConnectButton />
         </div>
         <div
