@@ -4,14 +4,14 @@ import App from "./App";
 
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { hardhat, goerli } from "wagmi/chains";
+import { hardhat, goerli, mainnet, sepolia, polygon, zkSync, optimism, polygonZkEvmTestnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
 import "@rainbow-me/rainbowkit/styles.css";
 import "./index.css";
 
 export const { chains, provider } = configureChains(
-  [hardhat, goerli],
+  [hardhat, goerli, mainnet, sepolia, polygon, zkSync, optimism, polygonZkEvmTestnet],
   [publicProvider()]
 );
 
