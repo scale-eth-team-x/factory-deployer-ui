@@ -1,42 +1,37 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
 
-import '@rainbow-me/rainbowkit/styles.css';
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+import { hardhat, goerli, mainnet, sepolia, polygon, zkSync, optimism, polygonZkEvmTestnet } from "wagmi/chains";
+import { publicProvider } from "wagmi/providers/public";
 
-import {
-  getDefaultWallets,
-  RainbowKitProvider,
-} from '@rainbow-me/rainbowkit';
-import { configureChains, createClient, WagmiConfig } from 'wagmi';
-import { hardhat, goerli } from 'wagmi/chains';
-import { publicProvider } from 'wagmi/providers/public';
+import "@rainbow-me/rainbowkit/styles.css";
+import "./index.css";
 
-const { chains, provider } = configureChains(
-  [hardhat, goerli],
-  [
-    publicProvider()
-  ]
+export const { chains, provider } = configureChains(
+  [hardhat, goerli, mainnet, sepolia, polygon, zkSync, optimism, polygonZkEvmTestnet],
+  [publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'WalletX Factory Deployer',
-  chains
+  appName: "WalletX Contract Uploader",
+  chains,
 });
 
-const wagmiClient = createClient({
-  autoConnect: true,
+export const wagmiClient = createClient({
+  autoConnect: false,
   connectors,
-  provider
-})
+  provider,
+});
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains}>
         <App />
       </RainbowKitProvider>
     </WagmiConfig>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
